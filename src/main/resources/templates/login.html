@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>WoL | Login</title>
+    <link th:replace="common/styles_page::styles_page"></link>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <h1 class="h1"><b>WoL</b> Utility</h1>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Login to begin</p>
+
+            <div>
+                <div class="input-group mb-3">
+                    <input id="inputUsername" type="text" class="form-control" placeholder="User">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input id="inputPassword" type="password" class="form-control" placeholder="Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <button id="btnLogin" class="btn btn-primary btn-block">Access</button>
+                    </div>
+                </div>
+                <br>
+                <div id="loginAlert" class="alert alert-warning alert-dismissible d-none">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Required action:</h5>
+                    <p id="txtLoginAlert">Aviso!</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+<!-- Footer -->
+<footer class="main-footer" style="position: fixed;left: 0;right: 0;bottom: 0;height: 50px; margin-left: 0px;">
+	<div class="float-right d-none d-sm-block">
+		<a href="https://github.com/elModo7/WakeOnLan-Web-API" target="_blank">Wake on LAN Web API GitHub</a> <b>Version</b> <span th:text="${WoLVersion}"></span>
+	</div>
+	<strong>V&iacute;ctor Santiago Mart&iacute;nez Picardo (elModo7) <span id="year_footer">2024</span></strong>
+</footer>
+
+<script type="text/javascript" charset="utf-8" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/js/adminlte.min.js}"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/js/login.js}"></script>
+</body>
+</html>

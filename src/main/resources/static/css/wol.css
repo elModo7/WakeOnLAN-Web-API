@@ -1,0 +1,20 @@
+::-webkit-scrollbar {
+    width: .45rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(27, 27, 27, .4);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-track{
+    background: transparent;
+}
+#scroll{
+  opacity: .7;
+}
+
+/* Tema */
+
+.img-connection {
+    width:36px;
+    height: auto;
+}

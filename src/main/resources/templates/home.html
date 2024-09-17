@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>WoL | Home</title>
+    </head>
+    <body class="sidebar-mini sidebar-open" style="height: auto;">
+        <div class="wrapper">
+            <nav th:replace="common/header::header"></nav>
+            <aside th:replace="common/menu::menu"></aside>
+            <div class="content-wrapper">
+            </div>
+        </div>
+		
+		<!-- Footer -->
+		<footer class="main-footer" style="position: fixed;left: 0;right: 0;bottom: 0;height: 50px">
+			<div class="float-right d-none d-sm-block">
+				<a href="https://github.com/elModo7/WakeOnLan-Web-API" target="_blank">Wake on LAN Web API GitHub</a> <b>Version</b> <span th:text="${WoLVersion}"></span>
+			</div>
+			<strong>V&iacute;ctor Santiago Mart&iacute;nez Picardo (elModo7) <span id="year_footer">2024</span></strong>
+		</footer>
+        <script type="text/JavaScript" charset="utf-8" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" charset="utf-8" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script type="text/JavaScript" charset="utf-8" th:src="@{/js/adminlte.min.js}"></script>
+        <script type="text/JavaScript" charset="utf-8" th:src="@{/js/home.js}"></script>
+    </body>
+</html>

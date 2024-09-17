@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="menu">
+    <!-- Brand Logo -->
+    <a href="/home" class="brand-link">
+        <img src="/img/main.jpg" alt="WoL Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8"/>
+        <span class="brand-text font-weight-light">WoL Utility</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+                    <a href="/devices/list" class="nav-link" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/devices/') ? 'active' : ''}">
+                        <i class="fas fa-server"></i>
+                        <p>DEVICES</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+        </div>
+        <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"/>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="height: 10.8193%; transform: translate(0px, 0px);"/>
+            </div>
+        </div>
+        <div class="os-scrollbar-corner"/>
+    </div>
+    <!-- /.sidebar -->
+</aside>
+</html>

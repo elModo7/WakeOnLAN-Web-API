@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>WoL | Device List</title>
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/css/responsive.bootstrap4.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/buttons.bootstrap4.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/toastr.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery-confirm.min.css}" type="text/css"/>
+</head>
+<body class="sidebar-mini layout-fixed sidebar-collapse" style="height: auto;">
+<div class="wrapper">
+    <nav th:replace="common/header::header"></nav>
+    <aside th:replace="common/menu::menu"></aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Devices</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                            <li class="breadcrumb-item active">Devices</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content" th:fragment="work_types_list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Device data:</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped w-100 table-sm" id="devices">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NAME</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>IP</th>
+                                            <th>MAC</th>
+                                            <th>STATUS</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="main-footer" style="position: fixed;left: 0;right: 0;bottom: 0;height: 50px">
+	<div class="float-right d-none d-sm-block">
+		<a href="https://github.com/elModo7/WakeOnLan-Web-API" target="_blank">Wake on LAN Web API GitHub</a> <b>Version</b> <span th:text="${WoLVersion}"></span>
+	</div>
+	<strong>V&iacute;ctor Santiago Mart&iacute;nez Picardo (elModo7) <span id="year_footer">2024</span></strong>
+</footer>
+		
+<script th:src="@{/js/jquery.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/adminlte.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/jquery.dataTables.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/dataTables.responsive.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/dataTables.bootstrap4.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/dataTable.Filter.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/toastr.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/jquery-confirm.min.js}" charset="utf-8"type="text/javascript"></script>
+<script th:src="@{/js/devices/list.js}" charset="utf-8"type="text/javascript"></script>
+</body>
+</html>
