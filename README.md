@@ -4,6 +4,8 @@
 This tool will allow you to deploy your own **Web Panel + REST API** for managing your **devices's power status**.
 You can expose it using _port-forwarding, VPN_ or _tunneling_ to allow for **Wake on Wan** capabilities.
 
+> If you found this to be useful for you, a ⭐**STAR** to the repo would be awesome.
+
 ## A bit of context
 
 Today, we are creating an _interactive web panel_ for **waking up your devices** but with a grain of salt.
@@ -220,7 +222,3 @@ Since our app is built in a **self-contained jar file**, we just need to _downlo
 ## Final Thoughts
 
 > There are may be **many ways** to power on your devices when you are not at home, but we developed **our own solution** for this task that just works and **_provides a high security while having full control over it_**.
-
-> A ⭐**STAR** to the repo would be awesome.
-
-I hope you enjoyed my **_first_ LinkedIn** article, will be documenting more stuff in the near future when time allows for it.
