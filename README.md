@@ -1,6 +1,7 @@
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGgAUYFTIrFZw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1726585268186?e=1732147200&v=beta&t=eev1lBpfWriMsXW84kuLGA1OvKxz3ahOdWi-kcRs-8Q)
-# Wake on Lan on Steroids for your HomeLab
+# Wake on LAN on Steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
+
 This tool will allow you to deploy your own **Web Panel + REST API** for managing your **devices's power status**.
 You can expose it using _port-forwarding, VPN_ or _tunneling_ to allow for **Wake on Wan** capabilities.
 
