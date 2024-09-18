@@ -237,6 +237,13 @@ In order to **containerize and deploy** this tool, with *docker engine installed
     docker build -t "wol_api" .
     docker run -d --name "WoL_API" -p 7800:7800/tcp "wol_api"
 
+Create a *new folder* called **target**, and put inside your generated **wol.jar**.
+
+You should have a structure similar to this one:
+
+![imagen](https://github.com/user-attachments/assets/c1096623-9eb1-4ce9-b2bb-4727730c8b3a)
+
+
 Add **permission** to deploy.sh to run it:
 
     sudo chmod 755 deploy.sh
@@ -247,7 +254,7 @@ Then just **run** the deploy script:
     
 ![imagen](https://github.com/user-attachments/assets/9b983397-fbfa-4aef-9d5d-f7f190d79da9)
 
-You should now have a *running container* called **WoL_API**.
+You should now have a *running container* called **WoL_API** and endpoint **https://0.0.0.0:7800/** should now be accessible.
 
 ## Remote Shutdown API Service
 From version *0.0.8* onwards, this API is compatible with this project **[Remote Shutdown API Service](https://github.com/elModo7/Remote-Shutdown-API)**.
