@@ -226,7 +226,17 @@ Since our app is built in a **self-contained jar file**, we just need to _downlo
 
 [This guide covers **pretty much everything I noted just now.**](https://www.baeldung.com/dockerizing-spring-boot-application)
 
-----------
+## Remote Shutdown API Service
+From version *0.0.8* onwards, this API is compatible with this project **[Remote Shutdown API Service](https://github.com/elModo7/Remote-Shutdown-API)**.
+This tool will allow you to deploy a **REST API** for **remotely shutting down your devices**.
+> You can run this **remote shutdown** service on your devices for allowing the web panel to shut down other devices on your network.
+
+It is compatible with theese hosts:
+
+ - Windows
+ - Unix
+ - MacOS
+ - Solaris
 
 ## Final Thoughts
 
