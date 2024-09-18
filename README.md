@@ -1,6 +1,8 @@
+
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGgAUYFTIrFZw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1726585268186?e=1732147200&v=beta&t=eev1lBpfWriMsXW84kuLGA1OvKxz3ahOdWi-kcRs-8Q)
-# Wake on Lan on Steroids for your HomeLab
+# Wake on LAN on Steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
+
 This tool will allow you to deploy your own **Web Panel + REST API** for managing your **devices's power status**.
 You can expose it using _port-forwarding, VPN_ or _tunneling_ to allow for **Wake on Wan** capabilities.
 
@@ -62,13 +64,20 @@ While **cloud** is getting more and more common, having solutions for us that we
 -   **Docker**
     
 -   **Certificate or OpenSSL Self-Signed Certificate**
+-  **Maven**
     
 
   
 
 ### Let's start with a basic setup (we will secure, dockerize... later)
 
-We are going to first copy our "**wol.jar"** file to a folder in our Linux box and switch to that folder
+We are going to first **build** our project and generate our jar file using **maven**.
+Make sure to have **maven in your PATH**.
+We will possition ourselves at the **root of our project** and run:
+
+    > mvn clean install -DskipTests
+
+Then we will copy our generated "**wol.jar"** file to a folder in our Linux box and switch to that folder
 
 ![](https://media.licdn.com/dms/image/v2/D4E12AQGSZ3uBdJobKg/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1726571623901?e=1732147200&v=beta&t=7EBZgbBgvYvj5J9ga7Slj2cH7-ZJuKTxwYi_Z2-Xkow)
 
@@ -189,7 +198,7 @@ So, since I have a connection already configured to the same device I am deployi
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGQnkl1yvIRWQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726576686635?e=1732147200&v=beta&t=UFr-WcVB3Y270kKTjHO0L5TNgGCV-Z7OUuxwBeCaboQ)
 I will just click on  **Run Tunnel**  to establish a tunnel that  **secures the connection**  towards the WoL Web Panel:
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGiaxP14nGn0w/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726576674745?e=1732147200&v=beta&t=yTXBwhiUqH1f1v4CVRz6fzAKavRZ6B6gHJ1qbvXkFa8)
-![](https://media.licdn.com/dms/image/v2/D4E12AQHiFqGyBy4SHg/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1726574878318?e=1732147200&v=beta&t=NXs2m8-05mjsn17ilS1dNQnK4GzFoN87ooaIrILCWKE)
+![Shutdown Enabled](https://github.com/user-attachments/assets/fe450184-f923-455e-b830-9ed1f77e7e4b)
 
   
 
