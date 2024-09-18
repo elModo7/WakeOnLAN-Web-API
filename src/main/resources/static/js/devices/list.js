@@ -66,9 +66,19 @@ function getDevices() {
                 data: null,
                 render: function(data)
                 {
-                    return '<div class="btn-group">'
-                    + '          <button class="btn btn-default btn-wol" name="' + data.name + '" mac="' + data.mac + '" + ip="' + data.ip + '" title="Send WoL"><i class="fas fa-power-off"></i></button>'
-                    + '     </div>';
+                    var btnHtml = '';
+                    var wolVisibleClass = "d-none";
+                    var shutdownVisibleClass = "d-none";
+                    if(data.shutdownable && data.status){
+                        shutdownVisibleClass = "";
+                    }else if(!data.status){
+                        wolVisibleClass = "";
+                    }
+
+                    btnHtml += '<div id="btn-wol-' + data.id + '" class="btn-group ' + wolVisibleClass + '"><button class="btn btn-default btn-wol bg-success" name="' + data.name + '" mac="' + data.mac + '" + ip="' + data.ip + '" title="Send WoL"><i class="fas fa-power-off"></i></button></div>';
+                    btnHtml += '<div id="btn-shutdown-' + data.id + '" class="btn-group ' + shutdownVisibleClass + '"><button class="btn btn-default btn-shutdown bg-danger" name="' + data.name + '" mac="' + data.mac + '" + ip="' + data.ip + '" title="Shutdown"><i class="fas fa-power-off"></i></button></div>';
+
+                    return btnHtml;
                 },
                 className: 'text-center',
                 searchable: false,
@@ -97,6 +107,28 @@ function getDevices() {
                     }
                 });
             });
+
+            $(".btn-shutdown").unbind("click");
+            $(".btn-shutdown").click(function(){
+                var name = $(this).attr("name");
+                var mac = $(this).attr("mac");
+                var ip = $(this).attr("ip");
+                wolModal = $.confirm({
+                    title: 'Shutdown Confirmation',
+                    content: 'Do you want to shut <b>' + name + '</b> down?',
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        "Shutdown!": function () {
+                            shutdown(name, mac, ip);
+                            wolModal.close();
+                        },
+                        cancel: function () {
+                            wolModal.close();
+                        }
+                    }
+                });
+            });
         },
     });
 }
@@ -105,6 +137,13 @@ function sendWoL(name, mac, ip) {
     notifyWoL(name);
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "./wol/" + mac + "&" + ip, true);
+    xhttp.send();
+}
+
+function shutdown(name, mac, ip) {
+    notifyShutdown(name);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./shutdown/" + ip, true);
     xhttp.send();
 }
 
@@ -129,16 +168,43 @@ function notifyWoL(name){
 	toastr["success"]("Turning " + name + " on.", "WoL Sent")
 }
 
+function notifyShutdown(name){
+	toastr.options = {
+	  "closeButton": false,
+	  "debug": false,
+	  "newestOnTop": false,
+	  "progressBar": false,
+	  "positionClass": "toast-top-center",
+	  "preventDuplicates": false,
+	  "onclick": null,
+	  "showDuration": "300",
+	  "hideDuration": "1000",
+	  "timeOut": "5000",
+	  "extendedTimeOut": "1000",
+	  "showEasing": "swing",
+	  "hideEasing": "linear",
+	  "showMethod": "fadeIn",
+	  "hideMethod": "fadeOut"
+	}
+	toastr["error"]("Turning " + name + " off.", "Shutdown Sent")
+}
+
 function threadGetDevices(){
     window.setInterval(function () {
         httpGetAsync("/getDevices", function (devices) {
             var devices = JSON.parse(devices);
             if(devices != null && devices.length > 0){
                 devices.forEach(function callback(device, index, array) {
+                    $("#btn-wol-" + device.id).addClass("d-none");
+                    $("#btn-shutdown-" + device.id).addClass("d-none");
                     if(device.status){
                         $("#img" + device.id).attr("src", "/img/online.png");
-                    }else{
+                        if(device.shutdownable){
+                            $("#btn-shutdown-" + device.id).removeClass("d-none");
+                        }
+                    }else if(!device.status){
                         $("#img" + device.id).attr("src", "/img/offline.png");
+                        $("#btn-wol-" + device.id).removeClass("d-none");
                     }
                 });
             }

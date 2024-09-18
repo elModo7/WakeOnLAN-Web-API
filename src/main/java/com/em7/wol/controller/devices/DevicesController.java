@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class DevicesController {
 
 	@Value("${version}")
     private String version;
+
+    @Value("${shutdown.port}")
+    private Integer shutdownPort;
 
     @RequestMapping(value = "/getDevices", method = RequestMethod.GET)
     @ResponseBody
@@ -98,6 +103,33 @@ public class DevicesController {
                 p.destroy();
             } catch (Exception e) {
                 log.error("There was an error turning on device with ip: " + ip + " mac: " + mac);
+                log.error("Error: " + e);
+            }
+            return "devices/list";
+        }else{
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping(path = "/devices/shutdown/{ip}", method = RequestMethod.GET)
+    public String sendShutdown(Model model, HttpServletRequest request, @PathVariable String ip) {
+        String username = (String) request.getSession().getAttribute("username");
+        if(username != null && !username.isEmpty()) {
+            model.addAttribute("username", username);
+            model.addAttribute("devices", getDevices(request));
+            log.info("Turning off device with ip: " + ip + " on shutdownPort: " + shutdownPort);
+            try {
+                URL url = new URL("http://" + ip + ":" + shutdownPort + "/shutdown");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                // Optional: Set timeouts for connection and read
+                con.setConnectTimeout(5000);
+                con.setReadTimeout(5000);
+                // Check the response code
+                int responseCode = con.getResponseCode();
+                con.disconnect();
+            } catch (Exception e) {
+                log.error("There was an error turning off device with ip: " + ip + " on shutdownPort: " + shutdownPort);
                 log.error("Error: " + e);
             }
             return "devices/list";

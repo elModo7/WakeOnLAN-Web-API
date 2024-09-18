@@ -10,4 +10,5 @@ public class OutDeviceDTO {
     private String ip;
     private String mac;
     private boolean status;
+    private boolean shutdownable;
 }

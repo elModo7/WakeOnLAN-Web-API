@@ -3,12 +3,19 @@ package com.em7.wol.service;
 import com.em7.wol.dto.out.OutDeviceDTO;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
 @Service
 public class PingService {
+
+    private final Integer shutdownPort = 7801;
 
     public void pingDevicesConcurrently(List<OutDeviceDTO> outDeviceDTOs) {
         // Create a thread pool with a fixed number of threads (can be customized)
@@ -21,6 +28,7 @@ public class PingService {
                     try {
                         InetAddress address = InetAddress.getByName(device.getIp());
                         boolean reachable = address.isReachable(500); // 100ms timeout should be fine, normally we are on LAN but some devices like ESPs may take longer to respond
+                        device.setShutdownable(checkShutdownService(device.getIp()));
                         device.setStatus(reachable);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -45,5 +53,32 @@ public class PingService {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean checkShutdownService(String ip){
+        ConcurrentLinkedQueue openPorts = new ConcurrentLinkedQueue<>();
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        List<Integer> portsToScan = new ArrayList<>(Arrays.asList(shutdownPort));
+        for(Integer port : portsToScan){
+            executorService.submit(() -> {
+                try {
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(ip, port), 500);
+                    socket.close();
+                    openPorts.add(port);
+                } catch (IOException e) {}
+            });
+        }
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List openPortList = new ArrayList<>();
+        while (!openPorts.isEmpty()) {
+            openPortList.add(openPorts.poll());
+        }
+        return openPortList.contains(shutdownPort);
     }
 }
