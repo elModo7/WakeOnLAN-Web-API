@@ -1,3 +1,4 @@
+
 # Wake on LAN on Steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
 
@@ -222,11 +223,31 @@ In order to **_add our newly created certificate to our Spring Boot application_
 
 ### Dockerizing our Spring Boot Application
 
-I was wanting to add a full step-by-step solution on this topic, but let's be honest, there are thousands of tutorials on how to **_dockerize a Spring Boot application_**.
+In order to **containerize and deploy** this tool, with *docker engine installed* you can **create this two files**:
 
-Since our app is built in a **self-contained jar file**, we just need to _download our favourite flavour of linux image, expose one port_, and have our app do a **_java -jar wol.jar_** on our container startup.
+**File**: dockerfile
 
-[This guide covers **pretty much everything I noted just now.**](https://www.baeldung.com/dockerizing-spring-boot-application)
+    FROM openjdk:17-jdk-slim
+    ARG JAR_FILE=target/*.jar
+    COPY ${JAR_FILE} wol.jar
+    ENTRYPOINT ["java","-jar","/wol.jar"]
+
+**File**: deploy.sh
+
+    docker build -t "wol_api" .
+    docker run -d --name "WoL_API" -p 7800:7800/tcp "wol_api"
+
+Add **permission** to deploy.sh to run it:
+
+    sudo chmod 755 deploy.sh
+
+Then just **run** the deploy script:
+
+    . deploy.sh
+    
+![imagen](https://github.com/user-attachments/assets/9b983397-fbfa-4aef-9d5d-f7f190d79da9)
+
+You should now have a *running container* called **WoL_API**.
 
 ## Remote Shutdown API Service
 From version *0.0.8* onwards, this API is compatible with this project **[Remote Shutdown API Service](https://github.com/elModo7/Remote-Shutdown-API)**.
