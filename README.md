@@ -6,9 +6,11 @@
 This tool will allow you to deploy your own **Web Panel + REST API** for managing your **devices's power status**.
 You can expose it using _port-forwarding, VPN_ or _tunneling_ to allow for **Wake on Wan** capabilities.
 
-From version 0.0.8 onwards, this API is compatible with this project Remote Shutdown API Service. This tool will allow you to deploy a REST API for remotely shutting down your devices.
-
 > If you found this to be useful for you, a ⭐**STAR** to the repo would be awesome.
+
+### Remote Shutdown
+From version *0.0.8* onwards, this API is compatible with this project **[Remote Shutdown API Service](https://github.com/elModo7/Remote-Shutdown-API)**.
+This tool will allow you to deploy a **REST API** for **remotely shutting down your devices**.
 
 ## A bit of context
 
