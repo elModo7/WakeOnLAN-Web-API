@@ -1,5 +1,3 @@
-
-![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGgAUYFTIrFZw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1726585268186?e=1732147200&v=beta&t=eev1lBpfWriMsXW84kuLGA1OvKxz3ahOdWi-kcRs-8Q)
 # Wake on LAN on Steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
 
@@ -21,7 +19,7 @@ While we always talk about _WoL_, we normally don't talk about what happens when
 
 The so-called "**Wake on Wan**" is something I have been doing for quite some while now via different methods like _SSH snippets and Amazon Alexa_.
 
-  
+![Shutdown Enabled](https://github.com/user-attachments/assets/fe450184-f923-455e-b830-9ed1f77e7e4b)
 
 ----------
 
@@ -203,7 +201,6 @@ So, since I have a connection already configured to the same device I am deployi
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGQnkl1yvIRWQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726576686635?e=1732147200&v=beta&t=UFr-WcVB3Y270kKTjHO0L5TNgGCV-Z7OUuxwBeCaboQ)
 I will just click on  **Run Tunnel**  to establish a tunnel that  **secures the connection**  towards the WoL Web Panel:
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQGiaxP14nGn0w/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726576674745?e=1732147200&v=beta&t=yTXBwhiUqH1f1v4CVRz6fzAKavRZ6B6gHJ1qbvXkFa8)
-![Shutdown Enabled](https://github.com/user-attachments/assets/fe450184-f923-455e-b830-9ed1f77e7e4b)
 
   
 
