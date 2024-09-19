@@ -271,7 +271,7 @@ It is compatible with theese hosts:
 ## Desktop App
 I have built a desktop app similar to **electron based** GUIs. I have no repo for it, but if someone is interested in it **just ask me about it**.
 
-![Wake_on_WAN_Manager_VFmxOsZGgK](https://github.com/user-attachments/assets/dc0cb731-c976-424d-b9da-2aceef3505a7)
+![image](https://github.com/user-attachments/assets/5a338cca-49ce-41dc-8c6b-6bd8d26a49b2)
 
 ## Final Thoughts
 
