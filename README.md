@@ -268,6 +268,11 @@ It is compatible with theese hosts:
  - MacOS
  - Solaris
 
+## Desktop App
+I have built a desktop app similar to **electron based** GUIs. I have no repo for it, but if someone is interested in it **just ask me about it**.
+
+![Wake_on_WAN_Manager_VFmxOsZGgK](https://github.com/user-attachments/assets/dc0cb731-c976-424d-b9da-2aceef3505a7)
+
 ## Final Thoughts
 
 > There are may be **many ways** to power on your devices when you are not at home, but we developed **our own solution** for this task that just works and **_provides a high security while having full control over it_**.
