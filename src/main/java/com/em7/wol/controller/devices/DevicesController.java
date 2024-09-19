@@ -1,29 +1,24 @@
 package com.em7.wol.controller.devices;
 
 
+import com.em7.wol.dto.out.OutDeviceDTO;
 import com.em7.wol.service.PingService;
 import com.em7.wol.util.RestUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.em7.wol.dto.out.OutDeviceDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +34,9 @@ public class DevicesController {
 
     @Value("${shutdown.port}")
     private Integer shutdownPort;
+
+    @Autowired
+    private PingService pingService;
 
     @RequestMapping(value = "/getDevices", method = RequestMethod.GET)
     @ResponseBody
@@ -78,7 +76,6 @@ public class DevicesController {
         List<OutDeviceDTO> outDeviceDTOs = gson.fromJson(RestUtils.asString(deviceListJSON), listType);
 
         try {
-            PingService pingService = new PingService();
             pingService.pingDevicesConcurrently(outDeviceDTOs);
         } catch (Exception e) {
             String methodName = new Object() {}.getClass().getEnclosingMethod().getName();

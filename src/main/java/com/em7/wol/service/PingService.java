@@ -1,6 +1,7 @@
 package com.em7.wol.service;
 
 import com.em7.wol.dto.out.OutDeviceDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,12 +16,12 @@ import java.util.concurrent.*;
 @Service
 public class PingService {
 
-    private final Integer shutdownPort = 7801;
+    @Value("${shutdown.port}")
+    private Integer shutdownPort;
 
     public void pingDevicesConcurrently(List<OutDeviceDTO> outDeviceDTOs) {
         // Create a thread pool with a fixed number of threads (can be customized)
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-
         try {
             // Loop through each device and submit a callable task to the executor
             for (OutDeviceDTO device : outDeviceDTOs) {
