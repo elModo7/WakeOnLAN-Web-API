@@ -1,5 +1,5 @@
 
-# Wake on LAN on Steroids for your HomeLab
+# Wake on LAN on steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
 
 This tool will allow you to deploy your own **Web Panel + REST API** for managing your **devices's power status**.
@@ -20,7 +20,9 @@ While we always talk about _WoL_, we normally don't talk about what happens when
 
 The so-called "**Wake on Wan**" is something I have been doing for quite some while now via different methods like _SSH snippets and Amazon Alexa_.
 
-![Shutdown Enabled](https://github.com/user-attachments/assets/fe450184-f923-455e-b830-9ed1f77e7e4b)
+![image](https://github.com/user-attachments/assets/04debbfd-25a7-426a-bbb1-f3b4da26321c)
+
+I have built a **desktop app** similar to **electron based** GUIs. I have no repo for it, but if someone is interested in it *just ask me about it*.
 
 ----------
 
@@ -121,9 +123,8 @@ Configuration for this login page can be located in our **application.properties
 
 Once we successfully log in, we will see our configured machines and their online status:
 
-![](https://media.licdn.com/dms/image/v2/D4E12AQHb117iLQQpsA/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1726572193921?e=1732147200&v=beta&t=gJznJlAZEmRPT3CrTHskWOZIQdKluHPKwfIvPZE2iCU)
+![Shutdown Enabled](https://github.com/user-attachments/assets/fe450184-f923-455e-b830-9ed1f77e7e4b)
 
-  
 
 We can then turn on our devices by clicking on the power button of each machine, we will be prompted before turning them on to prevent accidentally powering on a device.
 
@@ -268,10 +269,6 @@ It is compatible with theese hosts:
  - MacOS
  - Solaris
 
-## Desktop App
-I have built a desktop app similar to **electron based** GUIs. I have no repo for it, but if someone is interested in it **just ask me about it**.
-
-![image](https://github.com/user-attachments/assets/5a338cca-49ce-41dc-8c6b-6bd8d26a49b2)
 
 ## Final Thoughts
 
