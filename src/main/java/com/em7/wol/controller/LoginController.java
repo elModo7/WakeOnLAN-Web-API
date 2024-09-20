@@ -31,7 +31,6 @@ public class LoginController {
             , consumes = "application/json")
     @ResponseBody
     public SalidaLoginDTO login(@RequestBody EntradaLoginDTO loginDTO, HttpServletRequest request) {
-        String nombreMetodo = new Object() {}.getClass().getEnclosingMethod().getName();
         try {
             SalidaLoginDTO respuestaDTO = new SalidaLoginDTO();
             respuestaDTO.setResult("OK");
@@ -46,6 +45,7 @@ public class LoginController {
             }
             return respuestaDTO;
         } catch (Exception e) {
+            String nombreMetodo = new Object() {}.getClass().getEnclosingMethod().getName();
             String mensajeError = "Error en " + nombreMetodo + " - " + e.toString();
             log.error(mensajeError);
             SalidaLoginDTO respuestaDTO = new SalidaLoginDTO();

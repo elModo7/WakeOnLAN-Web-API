@@ -62,21 +62,21 @@ public class WebConfig implements WebMvcConfigurer {
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").resourceChain(false)
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").resourceChain(false)
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/").resourceChain(false)
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/").resourceChain(false)
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/webfonts/**").addResourceLocations("classpath:/static/webfonts/").resourceChain(false)
+        registry.addResourceHandler("/webfonts/**").addResourceLocations("classpath:/static/webfonts/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("css/fonts/material-icons/**").addResourceLocations("classpath:/static/css/fonts/material-icons/").resourceChain(false)
+        registry.addResourceHandler("css/fonts/material-icons/**").addResourceLocations("classpath:/static/css/fonts/material-icons/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/").resourceChain(false)
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
-        registry.addResourceHandler("/json/**").addResourceLocations("classpath:/static/json/").resourceChain(false)
+        registry.addResourceHandler("/json/**").addResourceLocations("classpath:/static/json/").resourceChain(true)
                 .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
     }
 

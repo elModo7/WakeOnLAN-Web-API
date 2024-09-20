@@ -22,9 +22,10 @@ public class HomeController {
         if(username != null && !username.isEmpty()) {
             model.addAttribute("username", username);
 			model.addAttribute("WoLVersion", version);
+            model.asMap().clear(); // Remove model parameters from URL
             return "redirect:/devices/list";
         }else{
-            return "redirect:/"; // Para que deje la URL bien
+            return "redirect:/";
         }
     }
 }
