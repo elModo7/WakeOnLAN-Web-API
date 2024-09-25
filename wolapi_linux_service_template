@@ -1,0 +1,47 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          wolapi
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       Minimalist Wake-On-LAN API service
+### END INIT INFO
+
+SCRIPT="java -jar /home/odroid/wol.jar"
+PIDFILE=/var/run/wolapi.pid
+
+start() {
+    echo "Starting wolapi..."
+    nohup $SCRIPT >/dev/null 2>&1 &
+    echo $! > $PIDFILE
+    echo "wolapi started with PID $(cat $PIDFILE)"
+}
+
+stop() {
+    if [ -f $PIDFILE ]; then
+        PID=$(cat $PIDFILE)
+        echo "Stopping wolapi (PID $PID)..."
+        kill $PID && rm -f $PIDFILE
+        echo "wolapi stopped."
+    else
+        echo "wolapi is not running."
+    fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac

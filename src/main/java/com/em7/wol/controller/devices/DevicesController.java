@@ -3,6 +3,7 @@ package com.em7.wol.controller.devices;
 
 import com.em7.wol.dto.out.OutDeviceDTO;
 import com.em7.wol.service.PingService;
+import com.em7.wol.service.WakeService;
 import com.em7.wol.util.RestUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +38,9 @@ public class DevicesController {
 
     @Autowired
     private PingService pingService;
+
+    @Autowired
+    private WakeService wakeService;
 
     @RequestMapping(value = "/getDevices", method = RequestMethod.GET)
     @ResponseBody
@@ -93,6 +97,8 @@ public class DevicesController {
             model.addAttribute("username", username);
             model.addAttribute("devices", getDevices(request));
             log.info("Turning on device with ip: " + ip + " mac: " + mac);
+
+            // Method 1: Using wakeonlan via package installed client
             Process p;
             try {
                 p = Runtime.getRuntime().exec("wakeonlan " + mac);
@@ -102,6 +108,10 @@ public class DevicesController {
                 log.error("There was an error turning on device with ip: " + ip + " mac: " + mac);
                 log.error("Error: " + e);
             }
+
+            // # Method 2: Using plain Java socket (I use both ports 7 and 9 for compatibility)
+            wakeService.sendMagicPacket(ip, mac);
+
             return "devices/list";
         }else{
             return "redirect:/";

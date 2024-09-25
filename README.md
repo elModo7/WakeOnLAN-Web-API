@@ -1,4 +1,5 @@
 
+  
 # Wake on LAN on steroids for your HomeLab
 ![enter image description here](https://media.licdn.com/dms/image/v2/D4E12AQF6AW53XmHJKQ/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1726568056394?e=1732147200&v=beta&t=ewBC8EpUBnNUM3v8IaNtCi9PfXQsgsXlUNNOoI1CrhI)
 
@@ -48,11 +49,12 @@ While **cloud** is getting more and more common, having solutions for us that we
 
 ### What we need
 
--   A **Linux** based computer (I am using an [ODROID-XU4](https://wiki.odroid.com/odroid-xu4/odroid-xu4))
-    
--   **Wakeonlan** packet installed
-    
+-   **~~Linux\*~~** Any computer capable of running Java (I am using an [ODROID-XU4](https://wiki.odroid.com/odroid-xu4/odroid-xu4))
+
 -   [Java JDK/JRE 1.8 or above](https://www.oracle.com/es/java/technologies/javase/javase8u211-later-archive-downloads.html)
+
+> \* Since version 0.1.2 a *Windows* computer should also be able to send WoL packets using this tool.
+
     
 
   
@@ -60,7 +62,9 @@ While **cloud** is getting more and more common, having solutions for us that we
 ### Recommended but not mandatory
 
 -   [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-    
+
+-   **Wakeonlan** packet installed *(optional since 0.1.2)*
+  
 -   **Sreeen**, **NoHup** or **Tmux** packet installed
     
 -   Ability to **port-forward** and open up ports
@@ -270,6 +274,29 @@ It is compatible with theese hosts:
  - Solaris
 
 
+## Add WoL_API as startup service for Unix
+
+Position yourself at the **init.d** folder:
+
+    cd /etc/init.d/
+
+Paste the contents of the file in this repo named **wolapi_linux_service_template** into a file named **wolapi**.
+
+Execute the following commands as **root**:
+
+    chmod +x wolapi
+    chown root wolapi
+    chgrp root wolapi
+    update-rc.d wolapi defaults
+    systemctl daemon-reload
+
+You should now have a service called **wolapi** running that will start on boot.
+
+
 ## Final Thoughts
 
 > There are may be **many ways** to power on your devices when you are not at home, but we developed **our own solution** for this task that just works and **_provides a high security while having full control over it_**.
+
+## Sources & Inspirations
+
+Native Java WoL packets *(0.1.2)* based on: https://github.com/Cyecize/Remote-Wake-On-Lan-Web
