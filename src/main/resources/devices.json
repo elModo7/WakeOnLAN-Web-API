@@ -8,11 +8,11 @@
     "status": false
   },
   {
-    "description": "8700K",
+    "description": "Google DNS",
     "id": 2,
-    "ip": "192.168.12.228",
+    "ip": "8.8.8.8",
     "mac": "30:9C:23:FF:FF:FF",
-    "name": "Desktop",
+    "name": "Google",
     "status": false
   },
   {

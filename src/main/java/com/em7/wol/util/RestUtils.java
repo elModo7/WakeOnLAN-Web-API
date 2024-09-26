@@ -14,10 +14,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Slf4j
 public class RestUtils {
     public static String doPost(String urlString, JsonObject params) {
-        String nombreMetodo = new Object() {
+        String methodName = new Object() {
         }.getClass().getEnclosingMethod().getName();
-        log.info(nombreMetodo + " Entrada datos: " + " - url: " + urlString + " - params: " + params.toString());
-        String respuesta = "";
+        log.info(methodName + " Data input: " + " - url: " + urlString + " - params: " + params.toString());
+        String response = "";
         try {
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -27,23 +27,23 @@ public class RestUtils {
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(params.toString());
             wr.flush();
-            respuesta = obtenerRespuesta(conn);
+            response = getResponse(conn);
             conn.disconnect();
         } catch (Exception e) {
             log.error("", e);
         }
-        log.info(nombreMetodo + " - Salida datos: " + respuesta);
-        return respuesta;
+        log.info(methodName + " - Data output: " + response);
+        return response;
     }
 
     public static String doGet(String urlString) {
-        log.info("Entrada GET a " + urlString);
+        log.info("GET to " + urlString);
         String respuesta = "";
         try {
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            respuesta = obtenerRespuesta(conn);
+            respuesta = getResponse(conn);
             conn.disconnect();
         } catch (Exception e) {
             log.error("", e);
@@ -51,9 +51,9 @@ public class RestUtils {
         return respuesta;
     }
 
-    private static String obtenerRespuesta(HttpURLConnection conn) throws Exception {
+    private static String getResponse(HttpURLConnection conn) throws Exception {
         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-            log.error("Error al conectar con el servidor");
+            log.error("Error connecting to the server");
         } else {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF_8));
             String strCurrentLine;
