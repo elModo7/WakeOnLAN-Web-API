@@ -271,6 +271,136 @@ It is compatible with theese hosts:
  - MacOS
  - Solaris
 
+## Code diagram
+```mermaid
+flowchart TD
+    %% Top Level: Client
+    B["Browser (Web Panel)"]:::client
+
+    %% Web Client Layer Subgraph
+    subgraph "Web Client Layer"
+        HT["HTML Templates"]:::client
+        SR["Static Resources"]:::client
+    end
+
+    %% Application Server Container Node
+    SBA["Spring Boot Application (Container)"]:::backend
+
+    %% Backend Layers Subgraph
+    subgraph "Controller Layer"
+        HC["HomeController"]:::controller
+        LC["LoginController"]:::controller
+        DC["DevicesController"]:::controller
+    end
+
+    subgraph "Service Layer"
+        WS["WakeService"]:::service
+        WSI["WakeServiceImpl"]:::service
+        PS["PingService"]:::service
+    end
+
+    subgraph "Configuration Components"
+        AC["AppConfiguration"]:::config
+        HC2["HttpsConfig"]:::config
+        WC["WebConfig"]:::config
+    end
+
+    %% Data/Configuration Storage Subgraph
+    subgraph "Data & Configuration Storage"
+        AP["Application Properties"]:::data
+        DEV["Devices Configuration"]:::data
+    end
+
+    %% External Integration Components Subgraph
+    subgraph "External Integration"
+        RD["Remote Shutdown API Service"]:::external
+        RU["RestUtils"]:::external
+    end
+
+    %% Deployment Artifacts Subgraph
+    subgraph "Deployment Artifacts"
+        MB["Maven Build File"]:::deployment
+        LS["Linux Service Template"]:::deployment
+    end
+
+    %% Data Flow Arrows
+    B -->|"HTTP/HTTPS"| LC
+    B -->|"HTTP/HTTPS"| DC
+    HT --- B
+    SR --- B
+
+    %% Controllers delegating to Service Layer
+    LC -->|"delegate"| WS
+    DC -->|"delegate"| WS
+    HC -->|"render view"| HT
+
+    %% Service Layer relationships
+    WS -->|"uses"| WSI
+    WSI -->|"reads"| AP
+    WSI -->|"reads"| DEV
+    WS -->|"triggers"| RD
+    RD --> RU
+
+    %% Controllers & Service access Configuration Components
+    HC2 --- WS
+    AC --- WS
+    WC --- LC
+
+    %% Deployment arrow from Spring Boot App Container
+    SBA --- MB
+    SBA --- LS
+
+    %% Link the Backend Container with its internal layers
+    SBA --- HC
+    SBA --- LC
+    SBA --- DC
+    SBA --- WS
+    SBA --- WSI
+    SBA --- PS
+    SBA --- AC
+    SBA --- HC2
+    SBA --- WC
+
+    %% Styles
+    classDef client fill:#f9e79f,stroke:#000,stroke-width:2px;
+    classDef controller fill:#aed6f1,stroke:#000,stroke-width:2px;
+    classDef service fill:#d5f5e3,stroke:#000,stroke-width:2px;
+    classDef config fill:#f5b7b1,stroke:#000,stroke-width:2px;
+    classDef data fill:#d6eaf8,stroke:#000,stroke-width:2px;
+    classDef external fill:#f0b27a,stroke:#000,stroke-width:2px;
+    classDef deployment fill:#e8daef,stroke:#000,stroke-width:2px;
+    classDef backend fill:#fad7a0,stroke:#000,stroke-width:2px;
+
+    %% Click Events for Web Client Layer
+    click HT "https://github.com/elmodo7/wakeonlan-web-api/tree/main/src/main/resources/templates"
+    click SR "https://github.com/elmodo7/wakeonlan-web-api/tree/main/src/main/resources/static"
+
+    %% Click Events for Controller Layer
+    click HC "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/controller/HomeController.java"
+    click LC "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/controller/LoginController.java"
+    click DC "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/controller/devices/DevicesController.java"
+
+    %% Click Events for Service Layer
+    click WS "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/service/WakeService.java"
+    click WSI "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/service/WakeServiceImpl.java"
+    click PS "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/service/PingService.java"
+
+    %% Click Events for Configuration Components
+    click AC "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/config/AppConfiguration.java"
+    click HC2 "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/config/HttpsConfig.java"
+    click WC "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/config/WebConfig.java"
+
+    %% Click Events for Data/Configuration Storage
+    click AP "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/resources/application.properties"
+    click DEV "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/resources/devices.json"
+
+    %% Click Event for External Integration Component
+    click RU "https://github.com/elmodo7/wakeonlan-web-api/blob/main/src/main/java/com/em7/wol/util/RestUtils.java"
+
+    %% Click Events for Deployment Artifacts
+    click MB "https://github.com/elmodo7/wakeonlan-web-api/blob/main/pom.xml"
+    click LS "https://github.com/elmodo7/wakeonlan-web-api/tree/main/wolapi_linux_service_template"
+```
 
 ## Add WoL_API as startup service for Unix
 
